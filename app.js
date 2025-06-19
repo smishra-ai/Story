@@ -18,7 +18,15 @@ const scenePrompts = {
 
 bot.start((ctx) => { ctx.reply("MastramGPT v2 activated! Use /set maa_beti or /set madarsa to begin."); });
 
-bot.command("set", (ctx) => { const args = ctx.message.text.split(" "); if (args.length < 2) return ctx.reply("Usage: /set <scenario>"); const key = args[1]; if (!scenePrompts[key]) return ctx.reply("Unknown scene key."); currentScene = scenePrompts[key]; locked = false; ctx.reply(Scene '${key}' loaded. You may now start chatting.); });
+bot.command("set", (ctx) => {
+  const args = ctx.message.text.split(" ");
+  if (args.length < 2) return ctx.reply("Usage: /set <scenario>");
+  const key = args[1];
+  if (!scenePrompts[key]) return ctx.reply("Unknown scene key.");
+  currentScene = scenePrompts[key];
+  locked = false;
+  ctx.reply(`Scene '${key}' loaded. You may now start chatting.`);
+});
 
 bot.command("lock", (ctx) => { if (!currentScene) return ctx.reply("No active scene. Use /set first."); locked = true; ctx.reply("Scene locked. Only your prompts will control the flow now."); });
 

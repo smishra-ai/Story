@@ -34,7 +34,7 @@ bot.command("reset", (ctx) => { currentScene = ""; locked = false; ctx.reply("Sc
 
 bot.on("text", async (ctx) => { if (!currentScene) return ctx.reply("Use /set <scene> to begin.");
 
-const prompt = ${currentScene}\n\nUser: ${ctx.message.text}\nAI:;
+const prompt = '${currentScene}\n\nUser: ${ctx.message.text}\nAI:';
 
 try { const response = await axios.post("https://openrouter.ai/api/v1/chat/completions", { model: process.env.MODEL_NAME, messages: [ { role: "system", content: currentScene }, { role: "user", content: ctx.message.text } ] }, { headers: { Authorization: Bearer ${process.env.OPENROUTER_API_KEY}, "Content-Type": "application/json" } });
 
